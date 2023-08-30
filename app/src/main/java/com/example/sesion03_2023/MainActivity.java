@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -66,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 } else if (itemId == R.id.bottom_library) {
                     openFragment(new LibraryFragment());
+                    return true;
+                } else if (itemId == R.id.nav_logout) {
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+                    finish();
                     return true;
                 }
                 return false;
