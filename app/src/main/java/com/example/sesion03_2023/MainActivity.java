@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     Toolbar toolbar;
     FloatingActionButton fab;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (itemId == R.id.bottom_library) {
                     openFragment(new LibraryFragment());
                     return true;
-                } else if (itemId == R.id.nav_logout) {
-                    Intent intent = new Intent(getApplicationContext(), Login.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
                 }
                 return false;
             }
@@ -108,10 +104,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "News", Toast.LENGTH_SHORT).show();
         } else if (itemId == R.id.nav_sports) {
             Toast.makeText(this, "Sports", Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.nav_logout) {
+            currentUser = null; // Eliminar la referencia al usuario actual
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
+            return true;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+
     }
 
     @Override

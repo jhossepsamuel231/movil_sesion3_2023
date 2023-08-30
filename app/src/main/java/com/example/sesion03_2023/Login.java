@@ -12,11 +12,14 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+
 public class Login extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText;
     Button loginButton;
     HashMap<String, User> userMap;
+    private User currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class Login extends AppCompatActivity {
         if (userMap.containsKey(username)) {
             User user = userMap.get(username);
             if (user.getPassword().equals(password)) {
+                currentUser = user; // Asignar el usuario actual
                 showSuccessMessageAndNavigate("Credenciales correctas");
             } else {
                 showErrorMessage("Contraseña incorrecta");
