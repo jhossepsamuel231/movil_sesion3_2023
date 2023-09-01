@@ -32,10 +32,10 @@ public class Login extends AppCompatActivity {
 
         userMap = new HashMap<>();
         // Agregar usuarios para probar
-        userMap.put("user1", new User("John", "Doe", "user1", "123", "Male"));
-        userMap.put("user2", new User("Jane", "Smith", "user2", "1234", "Female"));
-        userMap.put("user3", new User("Alice", "Johnson", "user3", "12345", "Female"));
-        userMap.put("user4", new User("Bob", "Brown", "user4", "123456", "Male"));
+        userMap.put("user1", new User("Jhossep", "Dareck", "user1", "123", "Male", "987-654-321", true, R.drawable.image1));
+        userMap.put("user2", new User("Gerson", "Bravo", "user2", "1234", "Female", "927-351-001", true, R.drawable.image2));
+        userMap.put("user3", new User("Rubi", "Figueroa", "user3", "12345", "Female", "987-134-121", true, R.drawable.image4));
+        userMap.put("user4", new User("Ailin", "Leche", "user4", "123456", "Male", "937-044-313", true, R.drawable.image3));
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
