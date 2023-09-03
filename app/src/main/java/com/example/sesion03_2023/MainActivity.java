@@ -1,5 +1,11 @@
     package com.example.sesion03_2023;
-    
+
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.view.MenuItem;
+    import android.view.View;
+    import android.widget.Toast;
+
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.ActionBarDrawerToggle;
     import androidx.appcompat.app.AppCompatActivity;
@@ -9,21 +15,20 @@
     import androidx.fragment.app.Fragment;
     import androidx.fragment.app.FragmentManager;
     import androidx.fragment.app.FragmentTransaction;
-    
-    import android.content.Intent;
-    import android.os.Bundle;
-    import android.view.Gravity;
-    import android.view.MenuItem;
-    import android.view.View;
-    import android.widget.Button;
-    import android.widget.Toast;
-    
-    import com.google.android.material.bottomappbar.BottomAppBar;
+
+    import com.example.sesion03_2023.Fragments.ChanelFragment;
+    import com.example.sesion03_2023.Fragments.GamingFragment;
+    import com.example.sesion03_2023.Fragments.HomeFragment;
+    import com.example.sesion03_2023.Fragments.MusicFragment;
+    import com.example.sesion03_2023.Fragments.ProfileFragment;
+    import com.example.sesion03_2023.Fragments.ShortsFragment;
+    import com.example.sesion03_2023.Fragments.SubscriptonsFragment;
+    import com.example.sesion03_2023.Fragments.TrendingFragment;
     import com.google.android.material.bottomnavigation.BottomNavigationView;
     import com.google.android.material.floatingactionbutton.FloatingActionButton;
     import com.google.android.material.navigation.NavigationBarView;
     import com.google.android.material.navigation.NavigationView;
-    
+
     public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     
         DrawerLayout drawerLayout;
@@ -31,13 +36,18 @@
         FragmentManager fragmentManager;
         Toolbar toolbar;
         FloatingActionButton fab;
+
         private User currentUser;
-    
+
+
+
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-    
+
+
             fab = findViewById(R.id.fab);
             toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -53,6 +63,7 @@
     
             bottomNavigationView = findViewById(R.id.bottom_navigation);
             bottomNavigationView.setBackground(null);
+
     
             bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override
@@ -86,13 +97,14 @@
             });
     
         }
-    
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-    
+
             int itemId= item.getItemId();
-    
-            if (itemId == R.id.nav_trending){
+            if (itemId == R.id.nav_chanel){
+                openFragment(new ChanelFragment());
+            } else if (itemId == R.id.nav_trending){
                 openFragment(new TrendingFragment());
             } else if (itemId == R.id.nav_music){
                 openFragment(new MusicFragment());
@@ -114,9 +126,13 @@
     
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
+
+
     
         }
-    
+
+
+
         @Override
         public void onBackPressed() {
     
@@ -132,4 +148,6 @@
             transaction.replace(R.id.fragment_container, fragment);
             transaction.commit();
         }
+
+
     }

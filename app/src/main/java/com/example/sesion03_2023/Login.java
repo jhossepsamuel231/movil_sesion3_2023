@@ -1,14 +1,14 @@
 package com.example.sesion03_2023;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
@@ -32,8 +32,8 @@ public class Login extends AppCompatActivity {
 
         userMap = new HashMap<>();
         // Agregar usuarios para probar
-        userMap.put("user1", new User("Jhossep", "Dareck", "user1", "123", "Male", "987-654-321", true, R.drawable.image1));
-        userMap.put("user2", new User("Gerson", "Bravo", "user2", "1234", "Female", "927-351-001", true, R.drawable.image2));
+        userMap.put("user1", new User("Jhossep", "Dareck", "user1", "123", "Female", "987-654-321", true, R.drawable.image1));
+        userMap.put("user2", new User("Gerson", "Bravo", "user2", "1234", "Male", "927-351-001", true, R.drawable.image2));
         userMap.put("user3", new User("Rubi", "Figueroa", "user3", "12345", "Female", "987-134-121", true, R.drawable.image4));
         userMap.put("user4", new User("Ailin", "Leche", "user4", "123456", "Male", "937-044-313", true, R.drawable.image3));
 

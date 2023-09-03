@@ -7,6 +7,11 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/nav_chanel"
+            android:icon="@drawable/baseline_video_camera_front_24"
+            android:title="chanel"
+            />
+        <item
             android:id="@+id/nav_trending"
             android:icon="@drawable/baseline_trending_up_24"
             android:title="Trending"/>
@@ -35,6 +40,7 @@
             android:id="@+id/nav_sports"
             android:icon="@drawable/baseline_sports_cricket_24"
             android:title="Sports"/>
+
 
         <item
             android:title="">

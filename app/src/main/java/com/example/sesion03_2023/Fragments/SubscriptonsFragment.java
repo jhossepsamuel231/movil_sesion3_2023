@@ -1,4 +1,4 @@
-package com.example.sesion03_2023;
+package com.example.sesion03_2023.Fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.sesion03_2023.R;
 
 /**
  * A simple {@link Fragment} subclass.
