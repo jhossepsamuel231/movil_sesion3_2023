@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controlador.PrincipalPage"
-    android:background="@color/white"
-    android:textColor="@color/black">
+    android:background="@color/Perfilb"
+    android:textColor="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="PRINCIPAL PAGE" />
+        android:text="PRINCIPAL PAGE"
+        android:textColor="@color/white"/>
 
 </FrameLayout>
