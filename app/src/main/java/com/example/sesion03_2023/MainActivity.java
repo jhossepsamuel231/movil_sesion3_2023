@@ -95,28 +95,32 @@
                     Toast.makeText(MainActivity.this, "Upload Videos", Toast.LENGTH_SHORT).show();
                 }
             });
+
+
+
     
         }
+
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
             int itemId= item.getItemId();
             if (itemId == R.id.nav_chanel){
                 openFragment(new ChanelFragment());
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
             } else if (itemId == R.id.nav_trending){
                 openFragment(new TrendingFragment());
+                Toast.makeText(this, "Trending", Toast.LENGTH_SHORT).show();
             } else if (itemId == R.id.nav_music){
                 openFragment(new MusicFragment());
+                Toast.makeText(this, "Music", Toast.LENGTH_SHORT).show();
             } else if (itemId == R.id.nav_gaming){
                 openFragment(new GamingFragment());
-            } else if (itemId == R.id.nav_movies){
-                Toast.makeText(this, "Movies", Toast.LENGTH_SHORT).show();
-            } else if (itemId == R.id.nav_news){
-                Toast.makeText(this, "News", Toast.LENGTH_SHORT).show();
-            } else if (itemId == R.id.nav_sports) {
-                Toast.makeText(this, "Sports", Toast.LENGTH_SHORT).show();
-            } else if (itemId == R.id.nav_logout) {
+                Toast.makeText(this, "Gaming", Toast.LENGTH_SHORT).show();
+            }  else if (itemId == R.id.nav_logout) {
                 currentUser = null; // Eliminar la referencia al usuario actual
                 Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
@@ -148,6 +152,5 @@
             transaction.replace(R.id.fragment_container, fragment);
             transaction.commit();
         }
-
 
     }
