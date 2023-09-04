@@ -1,9 +1,14 @@
     package com.example.sesion03_2023;
 
     import android.content.Intent;
+    import android.content.SharedPreferences;
     import android.os.Bundle;
+    import android.preference.PreferenceManager;
+    import android.view.Menu;
     import android.view.MenuItem;
     import android.view.View;
+    import android.widget.ImageView;
+    import android.widget.TextView;
     import android.widget.Toast;
 
     import androidx.annotation.NonNull;
@@ -28,6 +33,7 @@
     import com.google.android.material.floatingactionbutton.FloatingActionButton;
     import com.google.android.material.navigation.NavigationBarView;
     import com.google.android.material.navigation.NavigationView;
+
 
     public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     
@@ -136,6 +142,19 @@
         }
 
 
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+
+            User user = (User) getIntent().getSerializableExtra("user");
+
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.navigation_drawer_menu, menu);
+            TextView textView = findViewById(R.id.nav_nombre);
+            ImageView imageView = findViewById(R.id.nav_image);
+            textView.setText(user.getFirstName());
+            imageView.setImageResource(user.getProfileImageRes());
+            return true;
+        }
 
         @Override
         public void onBackPressed() {
@@ -154,3 +173,5 @@
         }
 
     }
+
+
