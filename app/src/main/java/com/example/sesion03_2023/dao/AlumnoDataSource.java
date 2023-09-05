@@ -30,14 +30,14 @@ public class AlumnoDataSource {
     public long agregarAlumno(Alumnos alumno) {
         ContentValues values = new ContentValues();
         values.put("nombre", alumno.getNombre());
-        values.put("apellido", alumno.getApellido());
+        values.put("apellidos", alumno.getApellidos());
         values.put("correo", alumno.getCorreo());
         values.put("carrera_id", alumno.getCarrera_id());
         return database.insert("alumnos", null, values);
     }
 
     public Alumnos buscarAlumnoPorID(int id) {
-        String[] projection = {"idAlumno", "nombre", "apellido", "correo", "carrera_id"};
+        String[] projection = {"idAlumno", "nombre", "apellidos", "correo", "carrera_id"};
         String selection = "idAlumno = ?";
         String[] selectionArgs = {String.valueOf(id)};
 
@@ -64,22 +64,22 @@ public class AlumnoDataSource {
     private Alumnos cursorToAlumno(Cursor cursor) {
         int idIndex = cursor.getColumnIndex("idAlumno");
         int nombreIndex = cursor.getColumnIndex("nombre");
-        int apellidoIndex = cursor.getColumnIndex("apellido");
+        int apellidoIndex = cursor.getColumnIndex("apellidos");
         int correoIndex = cursor.getColumnIndex("correo");
         int carreraIdIndex = cursor.getColumnIndex("carrera_id");
 
         int id = cursor.getInt(idIndex);
         String nombre = cursor.getString(nombreIndex);
-        String apellido = cursor.getString(apellidoIndex);
+        String apellidos = cursor.getString(apellidoIndex);
         String correo = cursor.getString(correoIndex);
         int carreraId = cursor.getInt(carreraIdIndex);
 
-        return new Alumnos(id, nombre, apellido, correo, carreraId);
+        return new Alumnos(id, nombre, apellidos, correo, carreraId);
     }
 
     public List<Alumnos> listarAlumnos() {
         List<Alumnos> listaAlumnos = new ArrayList<>();
-        String[] projection = {"idAlumno", "nombre", "apellido", "correo", "carrera_id"};
+        String[] projection = {"idAlumno", "nombre", "apellidos", "correo", "carrera_id"};
 
         Cursor cursor = database.query(
                 "alumnos",  // Nombre de la tabla
@@ -107,7 +107,7 @@ public class AlumnoDataSource {
     public int editarAlumno(Alumnos alumno) {
         ContentValues values = new ContentValues();
         values.put("nombre", alumno.getNombre());
-        values.put("apellido", alumno.getApellido());
+        values.put("apellidos", alumno.getApellidos());
         values.put("correo", alumno.getCorreo());
         values.put("carrera_id", alumno.getCarrera_id());
 

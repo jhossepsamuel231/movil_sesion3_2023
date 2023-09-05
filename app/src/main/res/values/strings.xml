@@ -6,4 +6,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_image">Profile Image</string>
     <string name="change_image">Change Image</string>
+    <string name="seleccionar_carrera">Seleccione su carrera</string>
 </resources>

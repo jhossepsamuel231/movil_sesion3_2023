@@ -1,0 +1,71 @@
+<!-- res/layout/fragment_your_table.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/FragmentStyle">
+
+    <!-- Título "Alumnos" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carreras"
+        style="@style/TableTitleStyle"
+        android:layout_gravity="start"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Botón "add" -->
+    <Button
+        android:id="@+id/btnAddCareer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        style="@style/AddButtonStyle"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Tabla de datos -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/TableStyle">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <!-- Encabezado de la tabla -->
+            <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Carrera"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="#f0f0f0"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Estado"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="#f0f0f0"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Opciones"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="#f0f0f0"/>
+            </TableRow>
+
+            <!-- Datos de los alumnos se agregarán aquí dinámicamente -->
+
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

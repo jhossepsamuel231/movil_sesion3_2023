@@ -7,18 +7,18 @@
         android:icon="@drawable/baseline_home_24"/>
 
     <item
-        android:id="@+id/bottom_shorts"
-        android:title="Shorts"
-        android:icon="@drawable/baseline_whatshot_24"/>
+        android:id="@+id/bottom_alumns"
+        android:title="Alumnos"
+        android:icon="@drawable/baseline_supervisor_account_24"/>
 
     <item
         android:title=""
         android:enabled="true"/>
 
     <item
-        android:id="@+id/bottom_subscriptions"
-        android:title="Subscriptions"
-        android:icon="@drawable/baseline_subscriptions_24"/>
+        android:id="@+id/bottom_carreras"
+        android:title="Carreras"
+        android:icon="@drawable/baseline_work_24"/>
 
     <item
         android:id="@+id/bottom_profile"

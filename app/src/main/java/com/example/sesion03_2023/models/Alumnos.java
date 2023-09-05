@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class Alumnos implements Serializable {
     private Integer idAlumno;
     private String nombre;
-    private String apellido;
+    private String apellidos;
     private String correo;
     private int carrera_id;
 
     public Alumnos() {
     }
 
-    public Alumnos(Integer idAlumno, String nombre, String apellido, String correo, int carrera_id) {
+    public Alumnos(Integer idAlumno, String nombre, String apellidos, String correo, int carrera_id) {
         this.idAlumno = idAlumno;
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellidos = apellidos;
         this.correo = correo;
         this.carrera_id = carrera_id;
     }
@@ -36,12 +36,12 @@ public class Alumnos implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellido) {
+        this.apellidos = apellido;
     }
 
     public String getCorreo() {

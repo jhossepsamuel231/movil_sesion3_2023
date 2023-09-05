@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Fragments.FormAddStudentFragment"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".FormAlumnoFragment">
+    android:gravity="center"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre" />
+        android:hint="Nombre"
+        android:textColor="@android:color/black"/>
 
     <EditText
-        android:id="@+id/editTextApellidos"
+        android:id="@+id/editTextApellido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellidos" />
+        android:hint="Apellido"
+        android:textColor="@android:color/black"/>
 
     <EditText
         android:id="@+id/editTextCorreo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Correo" />
+        android:hint="Correo"
+        android:textColor="@android:color/black"/>
 
     <Spinner
-        android:id="@+id/spinnerCarreras"
+        android:id="@+id/spinnerCarrera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/btnAgregar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Alumno" />
+        android:text="Agregar" />
 
 </LinearLayout>

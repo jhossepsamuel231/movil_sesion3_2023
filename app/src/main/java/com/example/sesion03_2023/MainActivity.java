@@ -21,7 +21,10 @@
     import androidx.fragment.app.FragmentManager;
     import androidx.fragment.app.FragmentTransaction;
 
+    import com.example.sesion03_2023.Fragments.AlumnsFragment;
+    import com.example.sesion03_2023.Fragments.CareerFragment;
     import com.example.sesion03_2023.Fragments.ChanelFragment;
+    import com.example.sesion03_2023.Fragments.FormAddStudentFragment;
     import com.example.sesion03_2023.Fragments.GamingFragment;
     import com.example.sesion03_2023.Fragments.HomeFragment;
     import com.example.sesion03_2023.Fragments.MusicFragment;
@@ -78,11 +81,11 @@
                     if (itemId == R.id.bottom_home){
                         openFragment(new HomeFragment());
                         return true;
-                    } else if (itemId == R.id.bottom_shorts) {
-                        openFragment(new ShortsFragment());
+                    } else if (itemId == R.id.bottom_alumns) {
+                        openFragment(new AlumnsFragment());
                         return true;
-                    }else if (itemId == R.id.bottom_subscriptions) {
-                        openFragment(new SubscriptonsFragment());
+                    }else if (itemId == R.id.bottom_carreras) {
+                        openFragment(new CareerFragment());
                         return true;
                     } else if (itemId == R.id.bottom_profile) {
                         openFragment(new ProfileFragment());
@@ -98,7 +101,7 @@
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MainActivity.this, "Upload Videos", Toast.LENGTH_SHORT).show();
+                    mostrarFormulario();
                 }
             });
 
@@ -106,8 +109,6 @@
 
     
         }
-
-
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -169,6 +170,23 @@
         private void openFragment(Fragment fragment){
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragment_container, fragment);
+            transaction.commit();
+        }
+        private void mostrarFormulario() {
+            // Crear una instancia del Fragment del formulario
+            Fragment formFragment = new FormAddStudentFragment();
+
+            // Iniciar la transacción de Fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            // Reemplazar el contenido actual con el Fragment del formulario
+            transaction.replace(R.id.fragment_container, formFragment);
+
+            // Agregar la transacción a la pila de retroceso (opcional)
+            transaction.addToBackStack(null);
+
+            // Confirmar la transacción
             transaction.commit();
         }
 
