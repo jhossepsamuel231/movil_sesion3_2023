@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sesion03_2023.R;
@@ -26,6 +30,7 @@ public class FormAddCareerFragment extends Fragment {
 
     private EditText editTextCareer;
     private Button btnAgregar;
+    private TextView textViewTitle;
     private CarreraDataSource carreraDataSource;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -41,23 +46,17 @@ public class FormAddCareerFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FormAddCareerFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static FormAddCareerFragment newInstance(String param1, String param2) {
+    public static FormAddCareerFragment newInstance(Carrera carrera, boolean isEditing) {
         FormAddCareerFragment fragment = new FormAddCareerFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, carrera);
+        args.putBoolean(ARG_PARAM2, isEditing);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +78,7 @@ public class FormAddCareerFragment extends Fragment {
 
         editTextCareer = view.findViewById(R.id.editTextCareer);
         btnAgregar = view.findViewById(R.id.btnAgregar);
+        textViewTitle = view.findViewById(R.id.tituloAddEdit);
 
         // Inicializar carreraDataSource
         carreraDataSource = new CarreraDataSource(requireContext());
@@ -108,6 +108,68 @@ public class FormAddCareerFragment extends Fragment {
                 editTextCareer.setText("");
             }
         });
+
+        // Verifica si estamos editando una carrera
+        if (getArguments() != null) {
+            Carrera carrera = (Carrera) getArguments().getSerializable(ARG_PARAM1);
+            boolean isEditing = getArguments().getBoolean(ARG_PARAM2);
+
+            if (carrera != null && isEditing) {
+                // Estamos editando una carrera, carga los datos
+                editTextCareer.setText(carrera.getNombre());
+
+                // Obtén la referencia al RadioGroup y RadioButtons
+                RadioGroup radioGroupEstado = view.findViewById(R.id.radioGroupEstado);
+                RadioButton radioButtonActiva = view.findViewById(R.id.radioButtonActiva);
+                RadioButton radioButtonInactiva = view.findViewById(R.id.radioButtonInactiva);
+
+                // Configura la visibilidad del RadioGroup
+                radioGroupEstado.setVisibility(View.VISIBLE);
+
+                // Establece el estado actual de la carrera en los RadioButtons
+                if (carrera.getEstado()) {
+                    radioButtonActiva.setChecked(true);
+                } else {
+                    radioButtonInactiva.setChecked(true);
+                }
+
+                // Cambia el título y el texto del botón
+
+                textViewTitle.setText("Editando Carrera");
+                btnAgregar.setText("Editar");
+
+                // Configura el listener para la acción de edición
+                btnAgregar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Obtener los datos editados y actualizar la carrera
+                        String nuevoNombre = editTextCareer.getText().toString().trim();
+                        if (TextUtils.isEmpty(nuevoNombre)) {
+                            editTextCareer.setError("El nombre de la carrera no puede estar vacío");
+                            return;
+                        }
+
+
+                        // Obtener el estado seleccionado de los RadioButtons
+                        boolean nuevoEstado = radioButtonActiva.isChecked(); // true si está activa, false si está inactiva
+
+
+                        // Actualizar la carrera existente
+                        carrera.setNombre(nuevoNombre);
+                        carrera.setEstado(nuevoEstado);
+
+                        // Llama a la función para actualizar la carrera en la base de datos
+                        if (carreraDataSource.actualizarCarrera(carrera)) {
+                            Toast.makeText(requireContext(), "Carrera actualizada con éxito", Toast.LENGTH_SHORT).show();
+                            // Cerrar el fragmento de edición y volver atrás
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        } else {
+                            Toast.makeText(requireContext(), "Error al actualizar la carrera", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }
 
         return view;
     }
