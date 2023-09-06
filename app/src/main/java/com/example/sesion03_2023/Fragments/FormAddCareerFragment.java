@@ -1,9 +1,6 @@
 package com.example.sesion03_2023.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.sesion03_2023.R;
 import com.example.sesion03_2023.dao.CarreraDataSource;
@@ -170,6 +169,7 @@ public class FormAddCareerFragment extends Fragment {
                 });
             }
         }
+
 
         return view;
     }

@@ -35,6 +35,10 @@ public class AlumnoDataSource {
         values.put("carrera_id", alumno.getCarrera_id());
         return database.insert("alumnos", null, values);
     }
+    public boolean eliminarAlumnoPorId(int alumnoId) {
+        return database.delete("alumnos", "idAlumno = ?", new String[]{String.valueOf(alumnoId)}) > 0;
+    }
+
 
     public Alumnos buscarAlumnoPorID(int id) {
         String[] projection = {"idAlumno", "nombre", "apellidos", "correo", "carrera_id"};

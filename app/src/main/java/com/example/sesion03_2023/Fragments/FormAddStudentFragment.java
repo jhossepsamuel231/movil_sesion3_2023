@@ -1,9 +1,7 @@
 package com.example.sesion03_2023.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.sesion03_2023.R;
 import com.example.sesion03_2023.dao.AlumnoDataSource;
@@ -50,21 +50,12 @@ public class FormAddStudentFragment extends Fragment {
     public FormAddStudentFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FormAddStudentFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static FormAddStudentFragment newInstance(String param1, String param2) {
+    public static FormAddStudentFragment newInstance(Alumnos alumnos, boolean isEditing) {
         FormAddStudentFragment fragment = new FormAddStudentFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, alumnos);
+        args.putBoolean(ARG_PARAM2, isEditing);
         fragment.setArguments(args);
         return fragment;
     }
@@ -156,7 +147,73 @@ public class FormAddStudentFragment extends Fragment {
                 }
 
             }
+
+
         });
+
+        // Verifica si estamos editando un alumno
+        if (getArguments() != null) {
+            Alumnos alumno = (Alumnos) getArguments().getSerializable(ARG_PARAM1);
+            boolean isEditing = getArguments().getBoolean(ARG_PARAM2);
+
+            if (alumno != null && isEditing) {
+                // Estamos editando un alumno, carga los datos
+                editTextNombre.setText(alumno.getNombre());
+                editTextApellido.setText(alumno.getApellidos());
+                editTextCorreo.setText(alumno.getCorreo());
+
+                // Cambia el título y el texto del botón
+                btnAgregar.setText("Actualizar");
+
+                // Configura el listener para la acción de edición
+                btnAgregar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        // Obtener la carrera seleccionada del Spinner
+                        Carrera carreraSeleccionada = (Carrera) spinnerCarrera.getSelectedItem();
+
+                        // Verificar si se ha seleccionado la opción ficticia
+                        if (carreraSeleccionada.getNombre().equals("Seleccione su carrera")) {
+                            // Mostrar un mensaje de error al usuario
+                            Toast.makeText(requireContext(), "Por favor, seleccione una carrera válida", Toast.LENGTH_SHORT).show();
+                            return; // Salir de la función sin procesar los datos
+                        }
+
+                        // Obtener los datos editados y actualizar el alumno
+                        String nuevoNombre = editTextNombre.getText().toString().trim();
+                        String nuevosApellidos = editTextApellido.getText().toString().trim();
+                        String nuevoCorreo = editTextCorreo.getText().toString().trim();
+                        int idCarreraSeleccionada = carreraSeleccionada.getIdCarrera();
+
+                        if (TextUtils.isEmpty(nuevoNombre) || TextUtils.isEmpty(nuevosApellidos) || TextUtils.isEmpty(nuevoCorreo)) {
+                            // Validación de campos vacíos
+                            Toast.makeText(requireContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        // Actualizar el alumno existente
+                        alumno.setNombre(nuevoNombre);
+                        alumno.setApellidos(nuevosApellidos);
+                        alumno.setCorreo(nuevoCorreo);
+                        alumno.setCarrera_id(idCarreraSeleccionada);
+
+                        // Llama a la función para actualizar el alumno en la base de datos
+                        AlumnoDataSource alumnoDataSource = new AlumnoDataSource(requireContext());
+                        alumnoDataSource.open();
+
+                        if (alumnoDataSource.editarAlumno(alumno) > 0) {
+                            Toast.makeText(requireContext(), "Alumno actualizado con éxito", Toast.LENGTH_SHORT).show();
+                            // Cerrar el fragmento de edición y volver atrás
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        } else {
+                            Toast.makeText(requireContext(), "Error al actualizar el alumno", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }
+
 
         return view;
     }
