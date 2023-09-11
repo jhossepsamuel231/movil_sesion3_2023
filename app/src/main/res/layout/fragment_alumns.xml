@@ -9,12 +9,13 @@
 
     <!-- Título "Alumnos" -->
     <TextView
+        style="@style/TableTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alumnos"
-        style="@style/TableTitleStyle"
         android:layout_gravity="start"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50sp"
+        android:text="Alumnos" />
 
     <!-- Botón "add" -->
     <Button
@@ -28,10 +29,10 @@
 
     <!-- Tabla de datos -->
     <ScrollView
+        style="@style/TableStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        style="@style/TableStyle">
+        android:layout_weight="1">
 
         <TableLayout
             android:id="@+id/tablayoutAlumns"
@@ -41,41 +42,46 @@
 
             <!-- Encabezado de la tabla -->
             <TableRow>
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
+                    android:background="#f0f0f0"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:background="#f0f0f0"/>
+                    android:text="Nombre" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Apellido"
+                    android:background="#f0f0f0"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:background="#f0f0f0"/>
+                    android:text="Apellido" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Carrera"
+                    android:background="#f0f0f0"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:background="#f0f0f0"/>
+                    android:text="Correo" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Correo"
+                    android:background="#f0f0f0"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:background="#f0f0f0"/>
+                    android:text="Carrera" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Opciones"
+                    android:background="#f0f0f0"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:background="#f0f0f0"/>
+                    android:text="Tools" />
             </TableRow>
 
             <!-- Datos de los alumnos se agregarán aquí dinámicamente -->
