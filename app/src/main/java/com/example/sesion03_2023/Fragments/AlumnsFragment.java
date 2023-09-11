@@ -1,16 +1,22 @@
 package com.example.sesion03_2023.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sesion03_2023.R;
 import com.example.sesion03_2023.dao.AlumnoDataSource;
@@ -123,15 +129,88 @@ public class AlumnsFragment extends Fragment {
             textViewCarrera.setPadding(8,8,8,8);
 
 
+
+            // Crear un LinearLayout horizontal para los iconos
+            LinearLayout iconLayout = new LinearLayout(requireContext());
+            iconLayout.setGravity(Gravity.CENTER);
+            iconLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            // Agregar icono de lápiz (editar)
+            ImageView editarIcon = new ImageView(requireContext());
+            editarIcon.setImageResource(R.drawable.baseline_edit_24); // Aquí debes tener tus recursos de icono de lápiz
+            editarIcon.setPadding(8, 8, 8, 8);
+            editarIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Aquí creas un cuadro de diálogo para confirmar la edición
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setMessage("¿Desea editar este Alumno?")
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // Si el usuario elige "Sí", abre el fragmento de edición
+                                    editarAlumno(alumno); // Debes pasar la carrera que se va a editar
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // Si el usuario elige "No", no haces nada
+                                }
+                            });
+                    // Crea y muestra el cuadro de diálogo
+                    builder.create().show();
+                }
+            });
+
+            // Agregar icono de tachito de basura (eliminar)
+            ImageView eliminarIcon = new ImageView(requireContext());
+            eliminarIcon.setImageResource(R.drawable.baseline_delete_24); // Aquí debes tener tus recursos de icono de tachito de basura
+            eliminarIcon.setPadding(8, 8, 8, 8);
+            eliminarIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Mostrar un cuadro de diálogo de confirmación antes de eliminar
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setMessage("¿Desea eliminar esta carrera?")
+                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Eliminar la carrera aquí
+                                    boolean alumnoEliminado = alumnoDataSource.eliminarAlumnoPorId(alumno.getIdAlumno());
+                                    if (alumnoEliminado) {
+                                        Toast.makeText(requireContext(), "Alumno eliminado correctamente", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Toast.makeText(requireContext(), "Error al eliminar al alumno", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // No hacer nada si el usuario selecciona "No"
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            });
+
+            iconLayout.addView(editarIcon);
+            iconLayout.addView(eliminarIcon);
+
             //Agregar las vistas a la fila
             row.addView(textViewNombreAlumno);
             row.addView(textViewApellidosAlumno);
             row.addView(textViewCorreo);
             row.addView(textViewCarrera);
+            row.addView(iconLayout);
 
             //Agregar la fila a la tabla
             tableLayout.addView(row);
+
         }
+
+
         return view;
     }
 
@@ -153,4 +232,23 @@ public class AlumnsFragment extends Fragment {
             return "Carrera no encontrada";
         }
     }
+
+    private void editarAlumno(Alumnos alumnos) {
+        // Crear una instancia del Fragment del formulario de edición
+        FormAddStudentFragment editFragment = FormAddStudentFragment.newInstance(alumnos, true);
+
+        // Iniciar la transacción de Fragment
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Reemplazar el contenido actual con el Fragment de edición
+        transaction.replace(R.id.fragment_container, editFragment);
+
+        // Agregar la transacción a la pila de retroceso (opcional)
+        transaction.addToBackStack(null);
+
+        // Confirmar la transacción
+        transaction.commit();
+    }
+
 }
