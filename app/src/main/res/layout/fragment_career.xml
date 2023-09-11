@@ -9,12 +9,13 @@
 
     <!-- Título "Alumnos" -->
     <TextView
+        style="@style/TableTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carreras"
-        style="@style/TableTitleStyle"
         android:layout_gravity="start"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50sp"
+        android:text="Carreras" />
 
     <!-- Botón "add" -->
     <Button
