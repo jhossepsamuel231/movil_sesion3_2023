@@ -2,7 +2,13 @@ package com.example.sesion03_2023.Fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +21,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.example.sesion03_2023.R;
 import com.example.sesion03_2023.dao.CarreraDataSource;
 import com.example.sesion03_2023.models.Carrera;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -228,7 +231,8 @@ public class CareerFragment extends Fragment {
         // Confirmar la transacción
         transaction.commit();
     }
-    private void editarCarrera(Carrera carrera) {
+
+        private void editarCarrera(Carrera carrera) {
             // Crear una instancia del Fragment del formulario de edición
             FormAddCareerFragment editFragment = FormAddCareerFragment.newInstance(carrera, true);
 
@@ -244,5 +248,8 @@ public class CareerFragment extends Fragment {
 
             // Confirmar la transacción
             transaction.commit();
-   }
+        }
+
+
+
 }
